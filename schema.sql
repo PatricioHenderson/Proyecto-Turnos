@@ -1,0 +1,8 @@
+DROP TABLE IF EXISTS gimnasio;
+
+CREATE TABLE gimnasio(
+    [id] INTEGER PRIMARY KEY AUTOINCREMENT,
+    [name] TEXT NOT NULL,
+    [age] INTEGER NOT NULL,
+    [nationality] TEXT NOT NULL
+);
