@@ -3,7 +3,7 @@
 <!--From https://codepen.io/frytyler/pen/EGdtg-->
 <head>
   <meta charset="UTF-8">
-  <title>Sign Up</title>
+  <title>Login</title>
   <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
 <link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
 <link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
@@ -22,37 +22,48 @@
     </div>
     <h1><a title="" href="">
         <img class="" src="" /></a>
-        Sign up
+        Seleccion de turnos
         <span style="font-size: 80%; color:  hsl(123, 99%, 44%);">
         </span><img class="" src="" /></h1>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.5.1/main.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.5.1/main.min.js"></script>
     <div>
     </div>
 
     <div class="topnav">
-        <a href="{{url_for('show_signup')}}">Registrarse</a>
-        <a href="{{url_for('login')}}">Ingresar </a>
-        <a href="{{url_for('logout')}}">Cerrar sesión </a>
-        <a href="{{url_for('agendar_turno')}}">Turnos </a>
-        
-        
+      <a href="{{url_for('show_signup')}}">Registrarse</a>
+      <a href="{{url_for('login')}}">Ingresar </a>
+      <a href="{{url_for('logout')}}">Cerrar sesión </a>
+      <a href="{{url_for('agendar_turno')}}">Turnos </a>
       
       </div><br>
 
   </header>
   <section class="main">
     <div class="form">
-      <h1>Nuevo usuario</h1>
-
-        <!-- Formulario para recibir los parámetros  -->
-        <form method = "POST" action="">
-          <input type="text" name="name" placeholder="Nombre" required="required" />
-          <input type="text" name="lastname" placeholder="Apellido" required="required" />
-          <input type="text" name="document" placeholder="documento" required="required" />
-          <input type="email" name="mail" placeholder="Email" required="required" />
-          <input type="password" name="password" placeholder="Password" required="required">
-          <input type="password" name="password2" placeholder="Password" required="required">
-          <button type="submit" class="btn btn-primary btn-block btn-large">Registrarse</button>
-        </form>
+      <h1>Calendario</h1>
+      <div id="calendar"></div>
+      <script>
+          let calendarEl = document.getElementById('calendar');
+          let calendar = new FullCalendar.Calendar(calendarEl,{
+            events : [
+              {% for event in events %}
+              {
+                title : '{{event.mail}}',
+                start : '{{event.date}}',
+              },
+              {% endfor %}
+            ]
+          });
+          calendar.render();
+          
+      </script>
+    </div>
+    <div>
+    <form method = "POST" action="{{url_for('agendar_turno')}}">
+        
+        <input type="date" name="date" placeholder="Elegir Fecha">
+        <button type="submit" class="btn btn-primary btn-block btn-large">Seleccionar turno</button>
     </div>
 
   </section>
