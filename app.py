@@ -116,7 +116,7 @@ def login():
 
         session['user'] = mail
         if user_validated is True:
-           
+            
             return redirect(url_for('agendar_turno'))
 
             
@@ -137,26 +137,36 @@ def logout():
 
 @app.route("/turnos", methods=['GET', 'POST'])
 def agendar_turno():
+    
+    if (session.get('user') is None):
+            return redirect(url_for('login'))  
+
+    
     if request.method == 'GET':
         try:
-            return render_template('calendario.html')
+            mail = session['user'] 
+            return render_template('calendario.html' , mail=mail )
         
         except:
             return jsonify({'trace':traceback.format_exc()})    
             
-    if request.method == 'POST':        
+    if request.method == 'POST':     
+
+         
+        
+        
         try:
             mail = session['user'] 
             date = request.form.get('date')
             
-            print(date)
+            
         
             events = [{
             'mail' : mail,
             'date' : date,
             }]
         
-            return render_template('calendario.html' , events=events )
+            return render_template('calendario.html' , events=events , mail = mail )
         
         except:
             return jsonify({'trace':traceback.format_exc()})

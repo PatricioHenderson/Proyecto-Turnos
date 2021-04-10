@@ -3,7 +3,7 @@
 <!--From https://codepen.io/frytyler/pen/EGdtg-->
 <head>
   <meta charset="UTF-8">
-  <title>Login</title>
+  <title>Calendario</title>
   <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
 <link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
 <link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
@@ -39,6 +39,13 @@
       </div><br>
 
   </header>
+
+  <section class="main">
+    <div class="form">
+      <h1>Hola {{mail}}</h1>
+    </div>
+
+  </section>
   <section class="main">
     <div class="form">
       <h1>Calendario</h1>
@@ -59,12 +66,14 @@
           
       </script>
     </div>
+    <br></br>
     <div>
     <form method = "POST" action="{{url_for('agendar_turno')}}">
         
         <input type="date" name="date" placeholder="Elegir Fecha">
         <button type="submit" class="btn btn-primary btn-block btn-large">Seleccionar turno</button>
     </div>
+    
 
   </section>
 
